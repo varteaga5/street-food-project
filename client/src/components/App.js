@@ -34,25 +34,30 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   // checks if user is a vendor, create user.isVendor
-  const userIsVendor = true;
+  const userIsVendor = !true;
   let userType;
-  const VendorType = <Route path="/" element={<VendProfile />} />;
-  userIsVendor
-    ? ((userType = <Route path="/" element={<VendProfile />} />),
-      (<Route path="/VendProfile" element={<VendProfile />} />))
-    : (userType = <Route path="/VendorList" element={<VendorList />} />);
+  const vendorType = (
+    <>
+      <Route path="/" element={<VendProfile />} />
+      <Route path="/Login" element={<Login />} />
+    </>
+  );
+  const custType = (
+    <>
+      <Route path="/" element={<FavList />} />
+      <Route path="/VendorList" element={<VendorList />} />
+      <Route path="/Login" element={<Login />} />
+      <Route path="/CustProfile" element={<CustProfile />} />
+    </>
+  );
+  userIsVendor ? (userType = vendorType) : (userType = custType);
 
   return (
     <div className="App">
-      <NavBar setUser={setUser} />
+      <NavBar userIsVendor={userIsVendor} setUser={setUser} />
       <h3>hello, {user} </h3>
       <div>
-        <Routes>
-          {userType}
-
-          <Route path="/Login" element={<Login />} />
-          <Route path="/CustProfile" element={<CustProfile />} />
-        </Routes>
+        <Routes>{userType}</Routes>
       </div>
     </div>
   );
