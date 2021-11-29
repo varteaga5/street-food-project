@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const CustSignUpForm = ({ onLogin }) => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -18,6 +19,7 @@ const CustSignUpForm = ({ onLogin }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name,
         username,
         password,
         password_confirmation: passwordConfirmation,

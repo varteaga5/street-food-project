@@ -6,10 +6,22 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 const NavBar = ({ setUser, userIsVendor }) => {
   console.log("this is userIsVendor", userIsVendor);
 
+  function handleLogout() {
+    console.log("this is logout");
+    // fetch("/logout", { method: "DELETE" }).then((r) => {
+    //   if (r.ok) {
+    //     setUser(null);
+    //   }
+    // });
+  }
+
   let userType;
   const vendorType = (
     <>
       <Nav.Link href="/">My Profile</Nav.Link>
+      <Nav.Link href="" onClick={handleLogout}>
+        Logout
+      </Nav.Link>
     </>
   );
   const custType = (
@@ -17,6 +29,9 @@ const NavBar = ({ setUser, userIsVendor }) => {
       <Nav.Link href="/VendorList">Browse Vendors</Nav.Link>
       <Nav.Link href="/">My favorite Vendors</Nav.Link>
       <Nav.Link href="/CustProfile">My Profile</Nav.Link>
+      <Nav.Link href="" onClick={handleLogout}>
+        Logout
+      </Nav.Link>
     </>
   );
   userIsVendor ? (userType = vendorType) : (userType = custType);
@@ -25,6 +40,9 @@ const NavBar = ({ setUser, userIsVendor }) => {
   const vendorTypeDD = (
     <>
       <NavDropdown.Item href="/">My Profile</NavDropdown.Item>
+      <Nav.Link href="" onClick={handleLogout}>
+        Logout
+      </Nav.Link>
     </>
   );
   const custTypeDD = (
@@ -34,6 +52,9 @@ const NavBar = ({ setUser, userIsVendor }) => {
       <NavDropdown.Item href="/VendorList">Browse Vendors</NavDropdown.Item>
       <NavDropdown.Divider />
       <NavDropdown.Item href="/CustProfile">My Profile</NavDropdown.Item>
+      <Nav.Link href="" onClick={handleLogout}>
+        Logout
+      </Nav.Link>
     </>
   );
   userIsVendor ? (userTypeDD = vendorTypeDD) : (userTypeDD = custTypeDD);
