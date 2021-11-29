@@ -40,9 +40,9 @@ const NavBar = ({ setUser, userIsVendor }) => {
   const vendorTypeDD = (
     <>
       <NavDropdown.Item href="/">My Profile</NavDropdown.Item>
-      <Nav.Link href="" onClick={handleLogout}>
+      <NavDropdown.Item href="" onClick={handleLogout}>
         Logout
-      </Nav.Link>
+      </NavDropdown.Item>
     </>
   );
   const custTypeDD = (
@@ -52,9 +52,10 @@ const NavBar = ({ setUser, userIsVendor }) => {
       <NavDropdown.Item href="/VendorList">Browse Vendors</NavDropdown.Item>
       <NavDropdown.Divider />
       <NavDropdown.Item href="/CustProfile">My Profile</NavDropdown.Item>
-      <Nav.Link href="" onClick={handleLogout}>
+      <NavDropdown.Divider />
+      <NavDropdown.Item href="" onClick={handleLogout}>
         Logout
-      </Nav.Link>
+      </NavDropdown.Item>
     </>
   );
   userIsVendor ? (userTypeDD = vendorTypeDD) : (userTypeDD = custTypeDD);

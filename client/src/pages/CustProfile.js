@@ -1,17 +1,36 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const CustProfile = () => {
   const [name, setName] = useState("rick");
-  const password = "123";
-  const favFood = "mex";
+  const [username, setUsername] = useState("rick209");
+  const [password, setPassword] = useState("123");
+  const [favFood, setFavFood] = useState("mex");
   const [wasClicked, setWasClicked] = useState(false);
   const [subOrEdit, setSubOrEdit] = useState(false);
+  const [errors, setErrors] = useState([]);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setSubOrEdit(!subOrEdit);
-    console.log("handle click");
-    return setWasClicked(!wasClicked);
+    setWasClicked(!wasClicked);
+    // fetch("/customer/" + "id", {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     name,
+    //     username,
+    //     password,
+    //     favFood,
+    //   }),
+    // }).then((r) => {
+    //   if (r.ok) {
+    //     setWasClicked(!wasClicked);
+    //   } else {
+    //     r.json().then((err) => setErrors(err.errors));
+    //   }
+    // });
   };
 
   const handleCancel = () => {
@@ -23,30 +42,63 @@ const CustProfile = () => {
       This is CustProfile
       {wasClicked ? (
         <>
-          <div>
-            <label>name</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>{password}</div>
-          <div>{favFood}</div>
-          <div>
-            <button onClick={handleCancel}>Cancel</button>
-          </div>
+          <form onSubmit={handleClick}>
+            <div>
+              <label>name</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>username</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Favorite Food</label>
+              <input
+                type="text"
+                id="favFood"
+                value={favFood}
+                onChange={(e) => setFavFood(e.target.value)}
+              />
+            </div>
+            <div>
+              <button onClick={handleClick}>
+                {subOrEdit ? "Submit" : "Edit"}
+              </button>
+              {errors.map((err) => (
+                <div key={err}>{err}</div>
+              ))}
+            </div>
+          </form>
         </>
       ) : (
         <>
           <div>{name}</div>
-          <div>{password}</div>
+          <div>{username}</div>
+          <div>password*****</div>
           <div>{favFood}</div>
         </>
       )}
       <hr />
-      <button onClick={handleClick}>{subOrEdit ? "Submit" : "Edit"}</button>
+      <button onClick={handleCancel}>{subOrEdit ? "Cancel" : "Edit"}</button>
     </div>
   );
 };
