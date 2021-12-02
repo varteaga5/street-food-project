@@ -12,7 +12,7 @@ const VendorList = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("/vendors").then((r) => r.json());
+    fetch("/vendorlist").then((r) => r.json());
     //   .then((data) => setVendors(data));
   }, []);
 

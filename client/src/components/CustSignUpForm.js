@@ -13,7 +13,7 @@ const CustSignUpForm = ({ onLogin }) => {
     e.preventDefault();
     setInputErrors([]);
     setIsLoading(true);
-    fetch("/signup", {
+    fetch("/customersignup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +37,17 @@ const CustSignUpForm = ({ onLogin }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">name</label>
+        <input
+          type="text"
+          id="name"
+          autoComplete="off"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          autoFocus
+        />
+      </div>
       <div>
         <label htmlFor="username">Username</label>
         <input

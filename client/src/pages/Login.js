@@ -5,11 +5,9 @@ import CustSignUpForm from "../components/CustSignUpForm";
 import VendLoginForm from "../components/VendLoginForm";
 import VendSignUpForm from "../components/VendSignUpForm";
 
-export const Login = () => {
+export const Login = ({ onLogin }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showCustLogin, setShowCustLogin] = useState(false);
-
-  const onLogin = () => {};
 
   return (
     <div>

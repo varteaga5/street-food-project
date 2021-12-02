@@ -9,7 +9,7 @@ const VendLoginForm = ({ onLogin }) => {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/login", {
+    fetch("/vendorlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

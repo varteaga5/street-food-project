@@ -19,11 +19,11 @@ function App() {
   //   companyName: "jose tacos",
   //   isVendor: true,
   // };
-  const [user, setUser] = useState("joe");
+  const [user, setUser] = useState(null);
 
   // on page load retrieves current user or vendor
   useEffect(() => {
-    fetch("/me").then((r) => {
+    fetch("/vendorme").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
@@ -34,7 +34,7 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   // checks if user is a vendor, create user.isVendor
-  const userIsVendor = !true;
+  const userIsVendor = user.IsVendor;
   let userType;
   const vendorType = (
     <>
@@ -55,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <NavBar userIsVendor={userIsVendor} setUser={setUser} />
-      <h3>hello, {user} </h3>
+      <h3>hello, {user.name} </h3>
       <div>
         <Routes>{userType}</Routes>
       </div>

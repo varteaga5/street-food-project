@@ -11,7 +11,7 @@ const CustLoginForm = ({ onLogin }) => {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/login", {
+    fetch("/customerlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

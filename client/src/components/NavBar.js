@@ -7,12 +7,11 @@ const NavBar = ({ setUser, userIsVendor }) => {
   console.log("this is userIsVendor", userIsVendor);
 
   function handleLogout() {
-    console.log("this is logout");
-    // fetch("/logout", { method: "DELETE" }).then((r) => {
-    //   if (r.ok) {
-    //     setUser(null);
-    //   }
-    // });
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
   }
 
   let userType;
