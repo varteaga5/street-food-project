@@ -25,8 +25,9 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        session.delete :user_id
-        head :no_content
+        # session.delete :user_id
+        # head :no_content
+        render json: "this is destroy"
     end
 
 end

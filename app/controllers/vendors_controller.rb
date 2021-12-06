@@ -21,7 +21,7 @@ class VendorsController < ApplicationController
     private
 
     def vendor_params
-        params.permit(:name, :username, :password, :password_confirmation, :foodType, :companyName, :isVendor)
+        params.permit(:firstName, :lastName, :email, :password, :password_confirmation, :foodType, :companyName, :isVendor)
     end
 end
 

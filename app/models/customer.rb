@@ -1,7 +1,8 @@
-class Customer < ApplicationRecord
-    # has_many :vendors
+class Customer < User
+    belongs_to :user
+
     has_secure_password
 
-    validates :username, presence: true, uniqueness: true
+    validates :favFood, presence: true
 
 end

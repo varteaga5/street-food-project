@@ -1,7 +1,10 @@
-class Vendor < ApplicationRecord
-    # belongs_to :customer
+class Vendor < User
+    belongs_to :user
+
     has_secure_password
 
-    validates :username, presence: true, uniqueness: true
+    validates :companyName, presence: true, uniqueness: true
+    validates :foodType, presence: true
 
 end
+

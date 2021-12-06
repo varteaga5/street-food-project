@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 
 const VendProfile = () => {
-  const [name, setName] = useState("robert");
-  const [username, setUsername] = useState("robert209");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("123");
   const [foodType, setFoodType] = useState("mex");
   const [companyName, setCompanyName] = useState("roberts tacos");
@@ -44,21 +45,30 @@ const VendProfile = () => {
         <>
           <form onSubmit={handleClick}>
             <div>
-              <label>name</label>
+              <label>firstName</label>
               <input
                 type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div>
-              <label>username</label>
+              <label>lastName</label>
               <input
                 type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>email</label>
+              <input
+                type="text"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -100,8 +110,9 @@ const VendProfile = () => {
         </>
       ) : (
         <>
-          <div>{name}</div>
-          <div>{username}</div>
+          <div>{firstName}</div>
+          <div>{lastName}</div>
+          <div>{email}</div>
           <div>password*****</div>
           <div>{companyName}</div>
           <div>{foodType}</div>

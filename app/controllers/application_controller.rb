@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   private
 # skip before action on all vendors controller methods
   def authorize
-    @current_user = Customer.find_by(id: session[:user_id])
+    @current_user = User.find_by(id: session[:user_id])
     render json: { errors: ["not authorized"] }, status: :unauthorized unless @current_user
   end
 

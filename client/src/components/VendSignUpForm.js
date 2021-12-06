@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 const VendSignUpForm = ({ onLogin }) => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -21,8 +22,9 @@ const VendSignUpForm = ({ onLogin }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
-        username,
+        firstName,
+        lastName,
+        email,
         password,
         password_confirmation: passwordConfirmation,
         foodType,
@@ -42,24 +44,35 @@ const VendSignUpForm = ({ onLogin }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">name</label>
+        <label htmlFor="firstName">firstName</label>
         <input
           type="text"
-          id="name"
+          id="firstName"
           autoComplete="off"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
           autoFocus
         />
       </div>
       <div>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="lastName">lastName</label>
         <input
           type="text"
-          id="username"
+          id="lastName"
           autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          autoFocus
+        />
+      </div>
+      <div>
+        <label htmlFor="email">email</label>
+        <input
+          type="text"
+          id="email"
+          autoComplete="off"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           autoFocus
         />
       </div>

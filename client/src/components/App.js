@@ -34,6 +34,7 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   // checks if user is a vendor, create user.isVendor
+  console.log("this is user.IsVendor", user.IsVendor);
   const userIsVendor = user.IsVendor;
   let userType;
   const vendorType = (
