@@ -8,17 +8,15 @@
 # Customer.create(name:"rick", username:"rickuser209", favFood: "tacos")
 
 
-
-
 puts "starting seed"
-#
-User.create!(type:'Vendor', firstName: 'timmyVendor', lastName: 'timmyVendor', email: 'timmyVendor@timmyVendor.com', password: '123', foodType: 'tacos', companyName:'timmytaco')
-User.create!(type:'Vendor', firstName: 'tobyVendor', lastName: 'tobyVendor', email: 'tobyVendor@tobyVendor.com', password: '123', foodType: 'tacos', companyName:'tobytaco')
-User.create!(type:'Vendor', firstName: 'tomVendor', lastName: 'tomVendor', email: 'tomVendor@tomVendor.com', password: '123', foodType: 'tacos', companyName:'tomtaco')
+# vendors
+Vendor.create!(firstName: 'timmyVendor', lastName: 'timmyVendor', email: 'timmyVendor@timmyVendor.com', password: '123', foodType: 'tacos', companyName:'timmytaco')
+Vendor.create!(firstName: 'tobyVendor', lastName: 'tobyVendor', email: 'tobyVendor@tobyVendor.com', password: '123', foodType: 'tacos', companyName:'tobytaco')
+Vendor.create!(firstName: 'tomVendor', lastName: 'tomVendor', email: 'tomVendor@tomVendor.com', password: '123', foodType: 'tacos', companyName:'tomtaco')
 
 # Customers
-User.create!(type:'Customer', firstName: 'peteCust', lastName: 'peteCust', email: 'peteCust@peteCust.com', password: '123', favFood:'tacos')
-User.create!(type:'Customer', firstName: 'paulCust', lastName: 'paulCust', email: 'paulCust@paulCust.com', password: '123', favFood:'tacos')
-User.create!(type:'Customer', firstName: 'patCust', lastName: 'patCust', email: 'patCust@patCust.com', password: '123', favFood: 'burro')
+Customer.create!(firstName: 'peteCust', lastName: 'peteCust', email: 'peteCust@peteCust.com', password: '123', favFood:'tacos')
+Customer.create!(firstName: 'paulCust', lastName: 'paulCust', email: 'paulCust@paulCust.com', password: '123', favFood:'tacos')
+Customer.create!(firstName: 'patCust', lastName: 'patCust', email: 'patCust@patCust.com', password: '123', favFood: 'burro')
 
 puts "seed complete"
