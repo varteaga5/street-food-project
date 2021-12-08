@@ -1,3 +1,4 @@
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :id, :name, :username, :password, :favFood
+  attributes :id, :firstName, :lastName, :favFood, :type, :email
+
 end

@@ -4,10 +4,15 @@ Rails.application.routes.draw do
 
   post "/vendorlogin", to: "sessions#create_vendor"
   post "/customerlogin", to: "sessions#create_customer"
+  post "/addfav", to: "customers#add_fav"
+
+  get "/showfav", to: "customers#show_fav"
+
+  patch "/updatevendor/:id", to: "vendors#update"
 
   # use frontend if statement to decide what get /me request to send
   get "/vendorlist", to: "vendors#vendor_list"
-  get "/vendorme", to: "vendors#show"
+  get "/me", to: "vendors#show"
   get "/customerme", to: "customers#show"
 
   delete "/logout", to: "sessions#destroy"

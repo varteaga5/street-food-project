@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+// used to go to home page on login
+import { useNavigate } from "react-router-dom";
 
 const CustLoginForm = ({ onLogin }) => {
   // formfield was formerly a div
-  //
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,7 +18,7 @@ const CustLoginForm = ({ onLogin }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
@@ -25,22 +27,23 @@ const CustLoginForm = ({ onLogin }) => {
         r.json().then((err) => setErrors(err.errors));
       }
     });
+    navigate("/");
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="email">email</label>
         <input
           type="text"
           id="username"
           autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">password</label>
         <input
           type="password"
           id="password"

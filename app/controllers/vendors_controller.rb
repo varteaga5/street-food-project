@@ -3,7 +3,7 @@ class VendorsController < ApplicationController
     skip_before_action :authorize, only: [:create, :show]
 
     def create
-        vendor = Vendor.create!(vendor_params)
+        vendor = User.vendors.create!(vendor_params)
         session[:user_id] = vendor.id
         render json: vendor, status: :created
     end
@@ -13,15 +13,25 @@ class VendorsController < ApplicationController
         render json: vendor
     end
 
-    def show
-        vendor = Vendor.find_by(id: session[:user_id])
+    def show 
+        vendor = @current_user
+        # vendor = Vendor.find_by(id: session[:user_id])
         render json: vendor
     end
+
+    def update
+        vendor = Vendor.find_by(id: session[:user_id])
+        vendor.update(vendor_params)
+        render json: vendor
+    end
+
+
 
     private
 
     def vendor_params
-        params.permit(:firstName, :lastName, :email, :password, :password_confirmation, :foodType, :companyName, :isVendor)
+        params.permit(:firstName, :lastName, :email, :password, :password_confirmation, :foodType, :companyName, :type)
     end
+
 end
 

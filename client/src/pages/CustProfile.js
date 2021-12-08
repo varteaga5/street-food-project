@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const CustProfile = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("123");
+const CustProfile = ({ currentUser }) => {
+  const [firstName, setFirstName] = useState(currentUser.firstName);
+  const [lastName, setLastName] = useState(currentUser.lastName);
+  const [email, setEmail] = useState(currentUser.email);
+  const [password, setPassword] = useState(currentUser.password);
   const [favFood, setFavFood] = useState("mex");
   const [wasClicked, setWasClicked] = useState(false);
   const [subOrEdit, setSubOrEdit] = useState(false);

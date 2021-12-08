@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
 
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create_vendor, :create_customer]
 
     def create_vendor
-        vendor = Vendor.find_by(username: params[:username])
+        vendor = Vendor.find_by(email: params[:email])
 
         if vendor&.authenticate(params[:password])
             session[:user_id] = vendor.id
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     end
 
     def create_customer
-        customer = Customer.find_by(username: params[:username])
+        customer = Customer.find_by(email: params[:email])
 
         if customer&.authenticate(params[:password])
             session[:user_id] = customer.id
@@ -25,9 +25,8 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        # session.delete :user_id
-        # head :no_content
-        render json: "this is destroy"
+        session.delete :user_id
+        head :no_content
     end
 
 end

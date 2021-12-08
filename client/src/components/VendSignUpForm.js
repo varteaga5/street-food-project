@@ -8,7 +8,7 @@ const VendSignUpForm = ({ onLogin }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [foodType, setFoodType] = useState("");
-  const [isVendor, setIsVendor] = useState(true);
+  const [type, setType] = useState("Vendor");
   const [inputErrors, setInputErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +29,7 @@ const VendSignUpForm = ({ onLogin }) => {
         password_confirmation: passwordConfirmation,
         foodType,
         companyName,
-        isVendor,
+        type,
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -44,7 +44,7 @@ const VendSignUpForm = ({ onLogin }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="firstName">firstName</label>
+        <label htmlFor="firstName">first name</label>
         <input
           type="text"
           id="firstName"
@@ -55,7 +55,7 @@ const VendSignUpForm = ({ onLogin }) => {
         />
       </div>
       <div>
-        <label htmlFor="lastName">lastName</label>
+        <label htmlFor="lastName">last name</label>
         <input
           type="text"
           id="lastName"
@@ -77,7 +77,7 @@ const VendSignUpForm = ({ onLogin }) => {
         />
       </div>
       <div>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">password</label>
         <input
           type="password"
           id="password"
@@ -87,7 +87,7 @@ const VendSignUpForm = ({ onLogin }) => {
         />
       </div>
       <div>
-        <label htmlFor="password">Password Confirmation</label>
+        <label htmlFor="password">password confirmation</label>
         <input
           type="password"
           id="password_confirmation"
@@ -97,7 +97,7 @@ const VendSignUpForm = ({ onLogin }) => {
         />
       </div>
       <div>
-        <label htmlFor="foodType">Food Type</label>
+        <label htmlFor="foodType">food type</label>
         <input
           type="text"
           id="foodType"
@@ -107,7 +107,7 @@ const VendSignUpForm = ({ onLogin }) => {
         />
       </div>
       <div>
-        <label htmlFor="companyName">Company Name</label>
+        <label htmlFor="companyName">company name</label>
         <input
           type="text"
           id="companyName"

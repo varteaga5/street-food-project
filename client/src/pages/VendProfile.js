@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 
-const VendProfile = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("123");
-  const [foodType, setFoodType] = useState("mex");
-  const [companyName, setCompanyName] = useState("roberts tacos");
+const VendProfile = ({ currentUser }) => {
+  const [firstName, setFirstName] = useState(currentUser.firstName);
+  const [lastName, setLastName] = useState(currentUser.lastName);
+  const [email, setEmail] = useState(currentUser.email);
+  const [password, setPassword] = useState(currentUser.password);
+  const [foodType, setFoodType] = useState(currentUser.foodType);
+  const [companyName, setCompanyName] = useState(currentUser.companyName);
   const [wasClicked, setWasClicked] = useState(false);
   const [subOrEdit, setSubOrEdit] = useState(false);
   const [errors, setErrors] = useState([]);
@@ -16,23 +16,26 @@ const VendProfile = () => {
     e.preventDefault();
     setSubOrEdit(!subOrEdit);
     setWasClicked(!wasClicked);
-    // fetch("/customer/" + "id", {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name,
-    //     username,
-    //     password,
-    //   }),
-    // }).then((r) => {
-    //   if (r.ok) {
-    //     setWasClicked(!wasClicked);
-    //   } else {
-    //     r.json().then((err) => setErrors(err.errors));
-    //   }
-    // });
+    fetch("/updatevendor/" + currentUser.id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+        companyName,
+        foodType,
+      }),
+    }).then((r) => {
+      if (r.ok) {
+        setWasClicked(!wasClicked);
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
   };
 
   const handleCancel = () => {
@@ -41,6 +44,7 @@ const VendProfile = () => {
   };
   return (
     <div>
+      <h2>My Profile</h2>
       {wasClicked ? (
         <>
           <form onSubmit={handleClick}>
@@ -110,12 +114,12 @@ const VendProfile = () => {
         </>
       ) : (
         <>
-          <div>{firstName}</div>
-          <div>{lastName}</div>
-          <div>{email}</div>
-          <div>password*****</div>
-          <div>{companyName}</div>
-          <div>{foodType}</div>
+          <div>first name: {firstName}</div>
+          <div>last name: {lastName}</div>
+          <div>email: {email}</div>
+          <div>password: *****</div>
+          <div>company name: {companyName}</div>
+          <div>food type: {foodType}</div>
         </>
       )}
       <hr />

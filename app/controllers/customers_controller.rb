@@ -12,6 +12,17 @@ class CustomersController < ApplicationController
         render json: customer
     end
 
+    def add_fav
+        @fav = Vendor.find_by(email: params[:email])
+        render json: @fav
+    end
+
+    def show_fav
+        favo = @fav
+        render json: favo
+    end
+
+
     private
 
     def customer_params

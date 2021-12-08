@@ -2,7 +2,8 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
+
 const NavBar = ({ setUser, userIsVendor }) => {
   console.log("this is userIsVendor", userIsVendor);
 
@@ -17,60 +18,36 @@ const NavBar = ({ setUser, userIsVendor }) => {
   let userType;
   const vendorType = (
     <>
-      <Nav.Link href="/">My Profile</Nav.Link>
-      <Nav.Link href="" onClick={handleLogout}>
-        Logout
+      <Navbar.Brand>Street Food</Navbar.Brand>
+      <Nav.Link as={Link} to="/">
+        My Profile
       </Nav.Link>
+      <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
     </>
   );
   const custType = (
     <>
-      <Nav.Link href="/VendorList">Browse Vendors</Nav.Link>
-      <Nav.Link href="/">My favorite Vendors</Nav.Link>
-      <Nav.Link href="/CustProfile">My Profile</Nav.Link>
-      <Nav.Link href="" onClick={handleLogout}>
-        Logout
+      <Nav.Link as={Link} to="/">
+        Browse Vendors
       </Nav.Link>
+      <Nav.Link as={Link} to="/FavList">
+        My favorite Vendors
+      </Nav.Link>
+      <Nav.Link as={Link} to="/CustProfile">
+        My Profile
+      </Nav.Link>
+      <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
     </>
   );
   userIsVendor ? (userType = vendorType) : (userType = custType);
 
-  let userTypeDD;
-  const vendorTypeDD = (
-    <>
-      <NavDropdown.Item href="/">My Profile</NavDropdown.Item>
-      <NavDropdown.Item href="" onClick={handleLogout}>
-        Logout
-      </NavDropdown.Item>
-    </>
-  );
-  const custTypeDD = (
-    <>
-      <NavDropdown.Item href="/">My favorite Vendors</NavDropdown.Item>
-      <NavDropdown.Divider />
-      <NavDropdown.Item href="/VendorList">Browse Vendors</NavDropdown.Item>
-      <NavDropdown.Divider />
-      <NavDropdown.Item href="/CustProfile">My Profile</NavDropdown.Item>
-      <NavDropdown.Divider />
-      <NavDropdown.Item href="" onClick={handleLogout}>
-        Logout
-      </NavDropdown.Item>
-    </>
-  );
-  userIsVendor ? (userTypeDD = vendorTypeDD) : (userTypeDD = custTypeDD);
-
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">Street Food</Navbar.Brand>
+        <Navbar.Brand>Street Food</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            {userType}
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              {userTypeDD}
-            </NavDropdown>
-          </Nav>
+          <Nav className="me-auto">{userType}</Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

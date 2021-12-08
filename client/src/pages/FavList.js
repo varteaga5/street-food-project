@@ -2,19 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const FavList = () => {
-  const testVendors = [
-    { id: 1, name: "jose", description: "donkey" },
-    { id: 2, name: "juan", description: "burro" },
-    { id: 3, name: "jack", description: "taco" },
-  ];
   // change usersHouses to vendors
-  const [vendors, setVendors] = useState(testVendors);
+  const [vendors, setVendors] = useState("");
   //   console.log("this is vendors", vendors);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("/vendors").then((r) => r.json());
-    //   .then((data) => console.log("this is data", data));
+    fetch("/showfav")
+      .then((r) => r.json())
+      .then((data) => console.log("this is data", data));
   }, []);
 
   function handleDelete(deleteVendor) {
@@ -65,9 +61,9 @@ const FavList = () => {
       ) : (
         <>
           <h2>No vendors Found</h2>
-          <button as={Link} to="/new">
-            Browse Vendors
-          </button>
+          <Link as={Link} to="/">
+            <button>Browse Vendors</button>
+          </Link>
         </>
       )}
     </section>

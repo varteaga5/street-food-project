@@ -1,3 +1,4 @@
 class VendorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :username, :password, :foodType, :companyName, :isVendor
+  attributes :id, :firstName, :lastName, :foodType, :companyName, :type, :email, :password
+
 end

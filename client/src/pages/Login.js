@@ -6,8 +6,8 @@ import VendLoginForm from "../components/VendLoginForm";
 import VendSignUpForm from "../components/VendSignUpForm";
 
 export const Login = ({ onLogin }) => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showCustLogin, setShowCustLogin] = useState(false);
+  const [showCustLogin, setShowCustLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <div>

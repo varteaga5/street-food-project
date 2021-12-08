@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import BtnAddVend from "../components/BtnAddVend";
 
 const VendorList = () => {
-  const testVendors = [
-    { id: 1, companyName: "jose tacos", foodType: "donkey" },
-    { id: 2, companyName: "juan burritos ", foodType: "burro" },
-    { id: 3, companyName: "jack tacos", foodType: "taco" },
-  ];
-
-  const [vendors, setVendors] = useState(testVendors);
+  const [vendors, setVendors] = useState(null);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("/vendorlist").then((r) => r.json());
-    //   .then((data) => setVendors(data));
+    fetch("/vendorlist")
+      .then((r) => r.json())
+      .then((data) => setVendors(data));
   }, []);
 
   const handleSearch = (e) => {
@@ -23,8 +18,9 @@ const VendorList = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((r) => r.json());
-    //   .then((data) => setVendors(data));
+    })
+      .then((r) => r.json())
+      .then((data) => setVendors(data));
   };
 
   return (
@@ -55,16 +51,13 @@ const VendorList = () => {
             <div>
               <h2>{vendor.companyName}</h2>
               <p>{vendor.foodType}</p>
-              <button>Visit Vendor</button>
+              <BtnAddVend currentVendor={vendor}></BtnAddVend>
             </div>
           </div>
         ))
       ) : (
         <>
           <h2>No vendors Found</h2>
-          <button as={Link} to="/new">
-            Browse Vendors
-          </button>
         </>
       )}
     </section>
