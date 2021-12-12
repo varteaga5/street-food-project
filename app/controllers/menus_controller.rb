@@ -6,7 +6,8 @@ class MenusController < ApplicationController
         # end
         
         def index
-            render_menu
+            vendor = find_vendor
+            render json: vendor
         end
 
         def create
@@ -15,8 +16,8 @@ class MenusController < ApplicationController
         end
 
         def show
-            vendor = find_vendor
-            render json: vendor.menus
+            
+            render json: find_vendor_menu
         end
     
     
@@ -27,9 +28,9 @@ class MenusController < ApplicationController
         end
         
         def destroy
-            house = find_house
-            house.destroy
-            render_houses
+            item = Menu.find_by(id: params[:id])
+            item.destroy
+            render json: @current_user.menus
         end
         
         private
@@ -38,8 +39,8 @@ class MenusController < ApplicationController
             params.permit(:companyName, :foodName, :foodDesc, :price )
         end
         
-        def find_vendor
-            @vendor = Vendor.find_by(id: params[:id])
+        def find_vendor_menu
+            @vendor = Menu.where(user_id: params[:id])
         end
         
         def render_menu

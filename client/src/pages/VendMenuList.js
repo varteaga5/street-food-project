@@ -16,6 +16,15 @@ const VendMenuList = ({ currentUser }) => {
       }
     });
   }, []);
+  console.log("this is menuList", menuList);
+
+  function handleDelete(menuItem) {
+    fetch("/menus/" + menuItem.target.id, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(setMenuList);
+  }
 
   const handleSearch = (e) => {
     // get to handle request
@@ -66,11 +75,13 @@ const VendMenuList = ({ currentUser }) => {
             <div>
               <h2>{food.foodName}</h2>
               <p>{food.foodDesc}</p>
-              <p>{food.price}</p>
+              <p>${food.price}</p>
             </div>
             <div>
               <button>Edit</button>
-              <button>Delete</button>
+              <button id={food.id} onClick={handleDelete}>
+                Delete
+              </button>
             </div>
           </div>
         ))
