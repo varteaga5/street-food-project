@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
     has_many :customers, class_name: 'Customer'
     has_many :vendors, class_name: 'Vendor'
+    has_many :fav_vendors
+    has_many :menus
 
     validates :firstName, presence: true
     validates :lastName, presence: true

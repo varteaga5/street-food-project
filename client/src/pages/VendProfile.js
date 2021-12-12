@@ -123,7 +123,9 @@ const VendProfile = ({ currentUser }) => {
         </>
       )}
       <hr />
-      <button onClick={handleCancel}>{subOrEdit ? "Cancel" : "Edit"}</button>
+      <button onClick={handleCancel}>
+        {subOrEdit ? "Cancel" : "Edit Profile"}
+      </button>
     </div>
   );
 };

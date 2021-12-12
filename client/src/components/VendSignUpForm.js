@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// used to go to home page on login
+import { useNavigate } from "react-router-dom";
 
 const VendSignUpForm = ({ onLogin }) => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +13,7 @@ const VendSignUpForm = ({ onLogin }) => {
   const [type, setType] = useState("Vendor");
   const [inputErrors, setInputErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,6 +42,7 @@ const VendSignUpForm = ({ onLogin }) => {
         r.json().then((err) => setInputErrors(err.errors));
       }
     });
+    navigate("/");
   }
 
   return (

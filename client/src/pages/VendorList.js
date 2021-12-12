@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import BtnAddVend from "../components/BtnAddVend";
+import BtnViewMenu from "../components/BtnViewMenu";
 
-const VendorList = () => {
+const VendorList = ({ currentUser, getMenuInfo }) => {
   const [vendors, setVendors] = useState(null);
   const [search, setSearch] = useState("");
 
@@ -51,7 +52,16 @@ const VendorList = () => {
             <div>
               <h2>{vendor.companyName}</h2>
               <p>{vendor.foodType}</p>
-              <BtnAddVend currentVendor={vendor}></BtnAddVend>
+
+              <BtnViewMenu
+                currentUser={currentUser}
+                currentVendor={vendor}
+                getMenuInfo={getMenuInfo}
+              ></BtnViewMenu>
+              <BtnAddVend
+                currentUser={currentUser}
+                currentVendor={vendor}
+              ></BtnAddVend>
             </div>
           </div>
         ))

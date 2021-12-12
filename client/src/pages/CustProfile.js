@@ -5,7 +5,7 @@ const CustProfile = ({ currentUser }) => {
   const [lastName, setLastName] = useState(currentUser.lastName);
   const [email, setEmail] = useState(currentUser.email);
   const [password, setPassword] = useState(currentUser.password);
-  const [favFood, setFavFood] = useState("mex");
+  const [favFood, setFavFood] = useState(currentUser.favFood);
   const [wasClicked, setWasClicked] = useState(false);
   const [subOrEdit, setSubOrEdit] = useState(false);
   const [errors, setErrors] = useState([]);

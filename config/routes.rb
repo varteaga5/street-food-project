@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
+  resources :menus
+  resources :fav_vendors
   post "/vendorsignup", to: "vendors#create"
   post "/customersignup", to: "customers#create"
 
-  post "/vendorlogin", to: "sessions#create_vendor"
-  post "/customerlogin", to: "sessions#create_customer"
-  post "/addfav", to: "customers#add_fav"
+  post "/vendorlogin", to: "sessions#create"
+  post "/customerlogin", to: "sessions#create"
 
-  get "/showfav", to: "customers#show_fav"
+  post "/addfav", to: "fav_vendors#create"
+  get "/showfav", to: "fav_vendors#show"
 
   patch "/updatevendor/:id", to: "vendors#update"
 
-  # use frontend if statement to decide what get /me request to send
   get "/vendorlist", to: "vendors#vendor_list"
-  get "/me", to: "vendors#show"
-  get "/customerme", to: "customers#show"
+  get "/me", to: "users#show"
+  # get "/customerme", to: "customers#show"
 
   delete "/logout", to: "sessions#destroy"
 

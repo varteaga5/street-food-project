@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-const BtnAddVend = ({ currentVendor }) => {
+const BtnAddVend = ({ currentVendor, currentUser }) => {
   const [addedVend, setAddedVend] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  console.log("this is currentVendor: ", currentVendor);
+  console.log("this is currentUser.id: ", currentUser.id);
 
   const clickHandler = (e) => {
-    fetch("addfav", {
+    fetch("/addfav", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ const BtnAddVend = ({ currentVendor }) => {
         email: currentVendor.email,
         foodType: currentVendor.foodType,
         companyName: currentVendor.companyName,
-        type: currentVendor.type,
+        user_id: currentUser.id,
       }),
     }).then((r) => {
       if (r.ok) {
@@ -31,7 +31,7 @@ const BtnAddVend = ({ currentVendor }) => {
   };
   return (
     <button onClick={clickHandler}>
-      {addedVend ? "added" : "add to Fav List"}
+      {addedVend ? "added" : "add to favorites"}
     </button>
   );
 };

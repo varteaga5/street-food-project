@@ -10,13 +10,18 @@
 
 puts "starting seed"
 # vendors
-Vendor.create!(firstName: 'timmyVendor', lastName: 'timmyVendor', email: 'timmyVendor@timmyVendor.com', password: '123', foodType: 'tacos', companyName:'timmytaco')
-Vendor.create!(firstName: 'tobyVendor', lastName: 'tobyVendor', email: 'tobyVendor@tobyVendor.com', password: '123', foodType: 'tacos', companyName:'tobytaco')
-Vendor.create!(firstName: 'tomVendor', lastName: 'tomVendor', email: 'tomVendor@tomVendor.com', password: '123', foodType: 'tacos', companyName:'tomtaco')
+# Vendor.create!(firstName: 'timmyVendor', lastName: 'timmyVendor', email: 'timmyVendor@timmyVendor.com', password: '123', foodType: 'tacos', companyName:'timmytaco')
+# Vendor.create!(firstName: 'tobyVendor', lastName: 'tobyVendor', email: 'tobyVendor@tobyVendor.com', password: '123', foodType: 'tacos', companyName:'tobytaco')
+# Vendor.create!(firstName: 'tomVendor', lastName: 'tomVendor', email: 'tomVendor@tomVendor.com', password: '123', foodType: 'tacos', companyName:'tomtaco')
 
-# Customers
-Customer.create!(firstName: 'peteCust', lastName: 'peteCust', email: 'peteCust@peteCust.com', password: '123', favFood:'tacos')
-Customer.create!(firstName: 'paulCust', lastName: 'paulCust', email: 'paulCust@paulCust.com', password: '123', favFood:'tacos')
-Customer.create!(firstName: 'patCust', lastName: 'patCust', email: 'patCust@patCust.com', password: '123', favFood: 'burro')
+# # Customers
+# Customer.create!(firstName: 'peteCust', lastName: 'peteCust', email: 'peteCust@peteCust.com', password: '123', favFood:'tacos')
+# Customer.create!(firstName: 'paulCust', lastName: 'paulCust', email: 'paulCust@paulCust.com', password: '123', favFood:'tacos')
+# Customer.create!(firstName: 'patCust', lastName: 'patCust', email: 'patCust@patCust.com', password: '123', favFood: 'burro')
+
+# fav_vendors
+
+FavVendor.create!(firstName: 'treVendor', lastName: 'treVendor', email: 'treVendor@treVendor.com', foodType: 'tacos', companyName:'tretacos', user_id:69)
+FavVendor.create!(firstName: 'dreVendor', lastName: 'dreVendor', email: 'dreVendor@dreVendor.com', foodType: 'tacos', companyName:'dretacos', user_id: 70)
 
 puts "seed complete"

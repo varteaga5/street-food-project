@@ -10,7 +10,7 @@ const FavList = () => {
   useEffect(() => {
     fetch("/showfav")
       .then((r) => r.json())
-      .then((data) => console.log("this is data", data));
+      .then((data) => setVendors(data));
   }, []);
 
   function handleDelete(deleteVendor) {
@@ -49,9 +49,9 @@ const FavList = () => {
         vendors.map((vendor) => (
           <article key={vendor.id}>
             <div>
-              <h2>{vendor.name}</h2>
-              <p>{vendor.description}</p>
-              <button>Visit Vendor</button>{" "}
+              <h2>{vendor.companyName}</h2>
+              <p>{vendor.foodType}</p>
+
               <button id={vendor.id} onClick={handleDelete}>
                 Remove
               </button>

@@ -18,9 +18,11 @@ const NavBar = ({ setUser, userIsVendor }) => {
   let userType;
   const vendorType = (
     <>
-      <Navbar.Brand>Street Food</Navbar.Brand>
       <Nav.Link as={Link} to="/">
         My Profile
+      </Nav.Link>
+      <Nav.Link as={Link} to="/VendMenuList">
+        My Menu
       </Nav.Link>
       <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
     </>
@@ -31,7 +33,7 @@ const NavBar = ({ setUser, userIsVendor }) => {
         Browse Vendors
       </Nav.Link>
       <Nav.Link as={Link} to="/FavList">
-        My favorite Vendors
+        My Favorite Vendors
       </Nav.Link>
       <Nav.Link as={Link} to="/CustProfile">
         My Profile
@@ -44,7 +46,9 @@ const NavBar = ({ setUser, userIsVendor }) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand>Street Food</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          Street Food
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">{userType}</Nav>

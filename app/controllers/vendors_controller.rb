@@ -13,11 +13,10 @@ class VendorsController < ApplicationController
         render json: vendor
     end
 
-    def show 
-        vendor = @current_user
-        # vendor = Vendor.find_by(id: session[:user_id])
-        render json: vendor
-    end
+    # def show 
+    #     vendor = User.find_by(id: session[:user_id])
+    #     render json: vendor
+    # end
 
     def update
         vendor = Vendor.find_by(id: session[:user_id])

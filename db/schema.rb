@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_053837) do
+ActiveRecord::Schema.define(version: 2021_12_11_050907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fav_vendors", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "firstName"
+    t.string "lastName"
+    t.string "email"
+    t.string "foodType"
+    t.string "companyName"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_fav_vendors_on_user_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "companyName"
+    t.string "foodName"
+    t.string "foodDesc"
+    t.string "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_menus_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "type"
@@ -29,4 +52,6 @@ ActiveRecord::Schema.define(version: 2021_12_06_053837) do
     t.index ["type"], name: "index_users_on_type"
   end
 
+  add_foreign_key "fav_vendors", "users"
+  add_foreign_key "menus", "users"
 end
