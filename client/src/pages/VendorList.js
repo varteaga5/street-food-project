@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BtnAddVend from "../components/BtnAddVend";
 import { useNavigate } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const VendorList = ({ currentUser, getMenuInfo, getVendorName }) => {
   const [vendors, setVendors] = useState(null);
