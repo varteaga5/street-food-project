@@ -11,13 +11,17 @@ import CustProfile from "../pages/CustProfile";
 import VendProfile from "../pages/VendProfile";
 import VendMenuList from "../pages/VendMenuList";
 import NewMenuItem from "../pages/NewMenuItem";
+import EditMenuItem from "../pages/EditMenuItem";
 
 function App() {
   const [user, setUser] = useState(null);
   const [menuInfo, setMenuInfo] = useState("");
-  // const [userType, setUserType] = useState(null)
-
-  // if (user.type)
+  const [foodId, setFoodId] = useState("");
+  const [currentFoodName, setCurrentFoodName] = useState("");
+  const [currentDesc, setCurrentDesc] = useState("");
+  const [currentPrice, setCurrentPrice] = useState("");
+  const [vendorName, setVendorName] = useState("");
+  console.log("this is menuInfo", menuInfo);
 
   // on page load retrieves current user or vendor
   useEffect(() => {
@@ -30,29 +34,63 @@ function App() {
 
   // if not logged in takes user to login screen
   if (!user) return <Login onLogin={setUser} />;
-  console.log("this is user", user);
+  // console.log("this is user", user);
 
   const vendorType = (
     <>
       <Route path="/" element={<VendProfile currentUser={user} />} />
-      <Route
-        path="/VendMenuList"
-        element={<VendMenuList currentUser={user} />}
-      />
       <Route path="/NewMenuItem" element={<NewMenuItem currentUser={user} />} />
       <Route path="/Login" element={<Login />} />
+      <Route
+        path="/VendMenuList"
+        element={
+          <VendMenuList
+            getFoodId={setFoodId}
+            getCurrentFoodName={setCurrentFoodName}
+            getCurrentDesc={setCurrentDesc}
+            getCurrentPrice={setCurrentPrice}
+            currentUser={user}
+          />
+        }
+      />
+      <Route
+        path="/EditMenuItem"
+        element={
+          <EditMenuItem
+            currentUser={user}
+            vendorFoodId={foodId}
+            currentFoodName={currentFoodName}
+            currentDesc={currentDesc}
+            currentPrice={currentPrice}
+          />
+        }
+      />
     </>
   );
   const custType = (
     <>
-      <Route path="/FavList" element={<FavList />} />
       <Route
-        path="/"
-        element={<VendorList currentUser={user} getMenuInfo={setMenuInfo} />}
+        path="/FavList"
+        element={
+          <FavList getMenuInfo={setMenuInfo} getVendorName={setVendorName} />
+        }
       />
       <Route path="/Login" element={<Login />} />
-      <Route path="/ViewMenu" menuInfo={menuInfo} element={<ViewMenu />} />
       <Route path="/CustProfile" element={<CustProfile currentUser={user} />} />
+      <Route
+        path="/"
+        element={
+          <VendorList
+            currentUser={user}
+            getMenuInfo={setMenuInfo}
+            getVendorName={setVendorName}
+          />
+        }
+      />
+      <Route
+        path="/ViewMenu"
+        element={<ViewMenu menuInfo={menuInfo} vendorName={vendorName} />}
+      />
     </>
   );
 

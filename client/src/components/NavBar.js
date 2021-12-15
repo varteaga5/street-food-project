@@ -5,8 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 
 const NavBar = ({ setUser, userIsVendor }) => {
-  console.log("this is userIsVendor", userIsVendor);
-
   function handleLogout() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {

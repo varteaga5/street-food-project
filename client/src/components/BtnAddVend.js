@@ -3,12 +3,10 @@ import { useState } from "react";
 
 const BtnAddVend = ({ currentVendor, currentUser }) => {
   const [addedVend, setAddedVend] = useState(false);
-  const [errors, setErrors] = useState([]);
-
-  console.log("this is currentUser.id: ", currentUser.id);
+  console.log("this is currentVendor.id", currentVendor.id);
 
   const clickHandler = (e) => {
-    fetch("/addfav", {
+    fetch("/fav_vendors", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,13 +19,7 @@ const BtnAddVend = ({ currentVendor, currentUser }) => {
         companyName: currentVendor.companyName,
         user_id: currentUser.id,
       }),
-    }).then((r) => {
-      if (r.ok) {
-        setAddedVend((prevState) => !prevState);
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+    }).then((r) => setAddedVend((prevState) => !prevState));
   };
   return (
     <button onClick={clickHandler}>

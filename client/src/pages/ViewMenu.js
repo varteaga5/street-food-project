@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const ViewMenu = ({ menuInfo }) => {
+const ViewMenu = ({ menuInfo, vendorName }) => {
   console.log("this is menuInfo: ", menuInfo);
+  const navigate = useNavigate();
+
   // clicks view menu, this will mirror btnaddvend
   // send fetch to retrieve menu items
   // when creating item use current vendor
 
-  // Menu model to include:
-  // companyName
-  // foodName
-  // foodDesc
-  // price
-  // belongs_to vendor
-
-  const [menuList, setMenuList] = useState([
-    {
-      id: 1,
-      companyName: "jimstacos",
-      foodName: "tacos",
-      foodDesc: "great tasting authentic tacos",
-      price: "3",
-    },
-  ]);
   return (
     <section>
-      <h3>{menuList.companyName}</h3>
+      <h3>{vendorName}'s menu</h3>
       <div>this is ViewMenu</div>
-      {menuList && menuList.length > 0 ? (
-        menuList.map((food) => (
+      {menuInfo && menuInfo.length > 0 ? (
+        menuInfo.map((food) => (
           <div
             key={food.id}
             style={{
@@ -49,7 +36,8 @@ const ViewMenu = ({ menuInfo }) => {
         ))
       ) : (
         <>
-          <h2>No Menu items Found</h2>
+          <h2>no menu items found</h2>
+          <button onClick={() => navigate("/")}>browse vendors</button>
         </>
       )}
     </section>

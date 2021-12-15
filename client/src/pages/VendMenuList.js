@@ -1,22 +1,24 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const VendMenuList = ({ currentUser }) => {
+const VendMenuList = ({
+  currentUser,
+  getFoodId,
+  getCurrentFoodName,
+  getCurrentDesc,
+  getCurrentPrice,
+}) => {
   const [menuList, setMenuList] = useState(null);
   const [search, setSearch] = useState("");
-  const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/menus/" + currentUser.id).then((r) => {
-      if (r.ok) {
-        r.json().then((menu) => setMenuList(menu));
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+    fetch("/menus/" + currentUser.id)
+      .then((r) => r.json())
+      .then((menu) => setMenuList(menu));
   }, []);
-  console.log("this is menuList", menuList);
 
   function handleDelete(menuItem) {
     fetch("/menus/" + menuItem.target.id, {
@@ -37,6 +39,21 @@ const VendMenuList = ({ currentUser }) => {
       .then((r) => r.json())
       .then((data) => setMenuList(data));
   };
+
+  const handleEdit = (e) => {
+    console.log("this is e.target.id ", e.target.id);
+    getFoodId(e.target.id);
+    getCurrentFoodName(e.target.getAttribute("foodname"));
+    getCurrentDesc(e.target.getAttribute("fooddesc"));
+    getCurrentPrice(e.target.getAttribute("foodprice"));
+    navigate("/EditMenuItem");
+  };
+
+  //   create button comp
+
+  // dont create btn comp
+  // in update page:
+  // useeffect pre pops data with current_user.menus.id
 
   return (
     <section>
@@ -78,7 +95,15 @@ const VendMenuList = ({ currentUser }) => {
               <p>${food.price}</p>
             </div>
             <div>
-              <button>Edit</button>
+              <button
+                id={food.id}
+                foodname={food.foodName}
+                fooddesc={food.foodDesc}
+                foodprice={food.price}
+                onClick={handleEdit}
+              >
+                Edit
+              </button>
               <button id={food.id} onClick={handleDelete}>
                 Delete
               </button>

@@ -6,8 +6,7 @@ class MenusController < ApplicationController
         # end
         
         def index
-            vendor = find_vendor
-            render json: vendor
+            render json: Menu.find_by(id: params[:id])
         end
 
         def create
@@ -15,16 +14,19 @@ class MenusController < ApplicationController
             render json: new_item, status: :created
         end
 
+        def show_by_name
+            vendor = Menu.where(companyName: params[:companyName])
+            render json: vendor
+        end
+
         def show
-            
             render json: find_vendor_menu
         end
     
-    
         def update
-            house = find_house
-            house.update(house_params)
-            render_houses
+            item = Menu.find_by(id: params[:id])
+            item.update(menu_params)
+            render json: @current_user.menus
         end
         
         def destroy

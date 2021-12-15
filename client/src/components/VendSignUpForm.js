@@ -10,7 +10,7 @@ const VendSignUpForm = ({ onLogin }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [foodType, setFoodType] = useState("");
-  const [type, setType] = useState("Vendor");
+  //   const [type, setType] = useState("Vendor");
   const [inputErrors, setInputErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const VendSignUpForm = ({ onLogin }) => {
         password_confirmation: passwordConfirmation,
         foodType,
         companyName,
-        type,
+        type: "Vendor",
       }),
     }).then((r) => {
       setIsLoading(false);

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import BtnAddVend from "../components/BtnAddVend";
-import BtnViewMenu from "../components/BtnViewMenu";
+import { useNavigate } from "react-router-dom";
 
-const VendorList = ({ currentUser, getMenuInfo }) => {
+const VendorList = ({ currentUser, getMenuInfo, getVendorName }) => {
   const [vendors, setVendors] = useState(null);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/vendorlist")
@@ -22,6 +23,16 @@ const VendorList = ({ currentUser, getMenuInfo }) => {
     })
       .then((r) => r.json())
       .then((data) => setVendors(data));
+  };
+
+  const viewMenuHandler = (e) => {
+    console.log("this is e.target.id ", e.target.id);
+    fetch("/menus/" + e.target.id)
+      .then((r) => r.json())
+      .then((menu) => getMenuInfo(menu));
+
+    getVendorName(e.target.getAttribute("getname"));
+    navigate("/ViewMenu");
   };
 
   return (
@@ -52,12 +63,15 @@ const VendorList = ({ currentUser, getMenuInfo }) => {
             <div>
               <h2>{vendor.companyName}</h2>
               <p>{vendor.foodType}</p>
+              <p>vendor.id: {vendor.id}</p>
 
-              <BtnViewMenu
-                currentUser={currentUser}
-                currentVendor={vendor}
-                getMenuInfo={getMenuInfo}
-              ></BtnViewMenu>
+              <button
+                id={vendor.id}
+                onClick={viewMenuHandler}
+                getname={vendor.companyName}
+              >
+                view menu
+              </button>
               <BtnAddVend
                 currentUser={currentUser}
                 currentVendor={vendor}

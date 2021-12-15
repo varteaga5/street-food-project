@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const FavList = () => {
-  // change usersHouses to vendors
+const FavList = ({ getMenuInfo, getVendorName }) => {
   const [vendors, setVendors] = useState("");
-  //   console.log("this is vendors", vendors);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/showfav")
+    fetch("/fav_vendors")
       .then((r) => r.json())
       .then((data) => setVendors(data));
   }, []);
 
   function handleDelete(deleteVendor) {
-    fetch("/vendors/" + deleteVendor.target.id, {
+    fetch("/fav_vendors/" + deleteVendor.target.id, {
       method: "DELETE",
     })
       .then((r) => r.json())
@@ -33,6 +32,16 @@ const FavList = () => {
       .then((data) => setVendors(data));
   };
 
+  const viewMenuHandler = (e) => {
+    console.log("this is e.target.id ", e.target.id);
+    fetch("/favmenus/" + e.target.id)
+      .then((r) => r.json())
+      .then((menu) => getMenuInfo(menu));
+
+    getVendorName(e.target.getAttribute("getname"));
+    navigate("/ViewMenu");
+  };
+
   return (
     <section>
       <h3>My Favorite Vendors</h3>
@@ -46,40 +55,36 @@ const FavList = () => {
       />
       <button onClick={handleSearch}>SEARCH</button>
       {vendors && vendors.length > 0 ? (
-        vendors.map((vendor) => (
-          <article key={vendor.id}>
-            <div>
-              <h2>{vendor.companyName}</h2>
-              <p>{vendor.foodType}</p>
-
-              <button id={vendor.id} onClick={handleDelete}>
-                Remove
-              </button>
-            </div>
-          </article>
-        ))
+        vendors.map(
+          (vendor) => (
+            console.log("this is vendor", vendor),
+            (
+              <article key={vendor.id}>
+                <div>
+                  <h2>{vendor.companyName}</h2>
+                  <p>{vendor.foodType}</p>
+                  <button
+                    id={vendor.companyName}
+                    onClick={viewMenuHandler}
+                    getname={vendor.companyName}
+                  >
+                    view menu
+                  </button>
+                  <button id={vendor.id} onClick={handleDelete}>
+                    remove from list
+                  </button>
+                </div>
+              </article>
+            )
+          )
+        )
       ) : (
         <>
           <h2>No vendors Found</h2>
-          <Link as={Link} to="/">
-            <button>Browse Vendors</button>
-          </Link>
+          <button onClick={() => navigate("/")}>Browse Vendors</button>
         </>
       )}
     </section>
   );
 };
 export default FavList;
-
-// visit vendor button
-{
-  /* <Link
-style={{ textDecoration: "none" }}
-to={{
-  pathname: "/Edit",
-  state: { vendorInfo: vendor },
-}}
->
-Go To Vendor
-</Link> */
-}

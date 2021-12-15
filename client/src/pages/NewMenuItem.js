@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NewMenuItem = ({ currentUser }) => {
-  const [companyName, setCompanyName] = useState(currentUser.companyName);
+  //   const [companyName, setCompanyName] = useState(currentUser.companyName);
   const [foodName, setFoodName] = useState("");
   const [foodDesc, setFoodDesc] = useState("");
   const [price, setPrice] = useState("");
@@ -19,7 +19,7 @@ const NewMenuItem = ({ currentUser }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        companyName,
+        companyName: currentUser.companyName,
         foodName,
         foodDesc,
         price,
@@ -66,7 +66,6 @@ const NewMenuItem = ({ currentUser }) => {
             value={price}
             placeholder="enter food price here"
             onChange={(e) => setPrice(e.target.value)}
-            autoFocus
           />
         </div>
         <div>
